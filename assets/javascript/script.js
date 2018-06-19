@@ -1,7 +1,6 @@
 
 
 var keywords = ["bugles", "breakdancing", "mozzarella", "pizza", "rainstorms", "bobcats", "lightning", "brewers", "fireworks", "burritos", "eagles", "parades", "japan", "cranes", "summer"];
-var origKeywords = ["bugles", "breakdancing", "mozzarella", "pizza", "rainstorms", "bobcats", "lightning", "brewers", "fireworks", "burritos", "eagles", "parades", "japan", "cranes", "summer"];
 var selectedKeyword = "";
 
 var searchBtn = $("button[type='submit']");
@@ -9,7 +8,7 @@ var resetBtn = $("#resetBtn");
 
 ///makes and updates buttons field
 function makeButtons(){
-
+    console.log("make run");
     $("#btn-col").empty();
     for (var i=0; i<keywords.length; i++){
         var newBtn = $("<button class='btn gifbtn btn-primary m-2 float-left'>").text(keywords[i]);
@@ -18,6 +17,7 @@ function makeButtons(){
     }
 }
 makeButtons();
+
 ///allows for button-search-term selection
 $(document).on("click", ".gifbtn", function(){
     $("#gifs-col").empty();
@@ -86,6 +86,5 @@ searchBtn.on("click", function(e){
 ///button to clear gifs area////
 resetBtn.on("click", function(){
     $("#gifs-col").empty();
-    keywords = origKeywords;
     makeButtons();
 })
