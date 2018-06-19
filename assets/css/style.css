@@ -12,11 +12,18 @@
   }
 
   #logo{
-    height: 100%;
+    height: 150px;
     width: 100%;
 }
 
 #main-content-section{
     background-image: url('../images/funky-lines.png');
-
+    height: 1300px;
 }
+/* 
+#searchForm{
+  border-bottom-left-radius:4%;
+  border-bottom-right-radius:4%;
+  border-top-left-radius:4%;
+  border-top-right-radius:4%;
+} */
