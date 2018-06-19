@@ -1,10 +1,11 @@
 
 
 var keywords = ["bugles", "breakdancing", "mozzarella", "pizza", "rainstorms", "bobcats", "lightning", "brewers", "fireworks", "burritos", "eagles", "parades", "japan", "cranes", "summer"];
-
+var origKeywords = ["bugles", "breakdancing", "mozzarella", "pizza", "rainstorms", "bobcats", "lightning", "brewers", "fireworks", "burritos", "eagles", "parades", "japan", "cranes", "summer"];
 var selectedKeyword = "";
 
 var searchBtn = $("button[type='submit']");
+var resetBtn = $("#resetBtn");
 
 ///makes and updates buttons field
 function makeButtons(){
@@ -28,7 +29,7 @@ function retrieveGifs(){
 
     
     $.ajax({
-        url: "https://api.giphy.com/v1/gifs/search?api_key=cDVT7MGH5kQi3g0vaQceOmMtnWwSVAFy&q=" + selectedKeyword + "&limit=10&offset=0&rating=G&lang=en",  
+        url: "https://api.giphy.com/v1/gifs/search?api_key=cDVT7MGH5kQi3g0vaQceOmMtnWwSVAFy&q=" + selectedKeyword + "&limit=10&offset=0&rating=&lang=en",  
         method: "GET"
       }).then(function(response){
         $("#gifs-col").empty();
@@ -82,9 +83,9 @@ searchBtn.on("click", function(e){
 
 });
 
-
-
-
-
-
-
+///button to clear gifs area////
+resetBtn.on("click", function(){
+    $("#gifs-col").empty();
+    keywords = origKeywords;
+    makeButtons();
+})
