@@ -4,35 +4,37 @@ var keywords = ["bugles", "breakdancing", "mozzarella", "pizza", "rainstorms", "
 
 var selectedKeyword = "";
 
+var searchBtn = $("button[type='submit']");
 
+///makes and updates buttons field
 function makeButtons(){
+
+    $("#btn-col").empty();
     for (var i=0; i<keywords.length; i++){
-        var newBtn = $("<button class='btn btn-primary m-2 float-left'>").text(keywords[i]);
+        var newBtn = $("<button class='btn gifbtn btn-primary m-2 float-left'>").text(keywords[i]);
         newBtn.attr("id", keywords[i]);
-        $("#btn-col").prepend(newBtn);
+        $("#btn-col").append(newBtn);
     }
 }
-
 makeButtons();
-
-$(document).on("click", ".btn", function(){
+///allows for button-search-term selection
+$(document).on("click", ".gifbtn", function(){
     $("#gifs-col").empty();
     selectedKeyword = $(this).attr("id");
     retrieveGifs();
 });
-
+///makes AJAX call for selected term, then generates the gifs
 function retrieveGifs(){
-    
+
     
     $.ajax({
         url: "https://api.giphy.com/v1/gifs/search?api_key=cDVT7MGH5kQi3g0vaQceOmMtnWwSVAFy&q=" + selectedKeyword + "&limit=10&offset=0&rating=G&lang=en",  
         method: "GET"
       }).then(function(response){
+        $("#gifs-col").empty();
         var gifArray = response.data;
-        console.log(gifArray);
         
         for (var i=0; i<gifArray.length; i++){
-            console.log(i);
             var gifDiv = $("<div class='clearfloat float-left m-1'>");
             var gifP = $("<p class='giftext text-sm-left'>");
             gifP.text("Rating: " + gifArray[i].rating);
@@ -49,7 +51,7 @@ function retrieveGifs(){
         }
     });
 }
-
+///toggles still and animated gifs
 $(document).on("click", ".gifImg", function(){
     var state = $(this).attr("data-state");
 
@@ -61,6 +63,24 @@ $(document).on("click", ".gifImg", function(){
         $(this).attr("data-state", "still");
     }
 })
+///takes inputed search term in right-side form, adds term to keywords (so button is created)
+///and changes selectedKeyword to new input (allowing AJAX call based on new term), 
+///then calls makeButton and retrieveGif functions to update page
+searchBtn.on("click", function(e){
+    e.preventDefault();
+
+    var userTerm = $("#userTerm").val();
+    $("#userTerm").val("");
+
+    selectedKeyword = userTerm;
+    keywords.push(userTerm);
+
+    makeButtons();
+
+    retrieveGifs();
+
+
+});
 
 
 
