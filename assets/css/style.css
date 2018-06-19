@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     text-align: center;
-    background-color: green;
+
   }
   
   .clearfix::after {
@@ -10,3 +10,13 @@
     display: table;
     overflow: auto;
   }
+
+  #logo{
+    height: 100%;
+    width: 100%;
+}
+
+#main-content-section{
+    background-image: url('../images/funky-lines.png');
+
+}
