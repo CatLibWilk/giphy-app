@@ -18,5 +18,10 @@
 
 #main-content-section{
     background-image: url('../images/funky-lines.png');
-    height: 1300px;
+    min-height: 625px;
+    height: 100%;
+}
+
+.fivImg{
+  max-width: 250px;
 }

@@ -8,7 +8,6 @@ var resetBtn = $("#resetBtn");
 
 ///makes and updates buttons field
 function makeButtons(){
-    console.log("make run");
     $("#btn-col").empty();
     for (var i=0; i<keywords.length; i++){
         var newBtn = $("<button class='btn gifbtn btn-primary m-2 float-left'>").text(keywords[i]);
@@ -40,6 +39,12 @@ function retrieveGifs(){
             var gifP = $("<p class='giftext text-sm-left'>");
             gifP.text("Rating: " + gifArray[i].rating);
             var gifImg = $("<img class='gifImg float-left'>");
+            var favBtn = $("<button class='favBtn btn btn-warning float-left'>");
+            favBtn.text("add to Favs");
+            favBtn.attr("data-still", gifArray[i].images.fixed_height_still.url);   
+            favBtn.attr("data-animate", gifArray[i].images.fixed_height.url);
+            favBtn.attr("data-state", "still");
+
             gifImg.attr("src", gifArray[i].images.fixed_height_still.url);
             gifImg.attr("data-still", gifArray[i].images.fixed_height_still.url);   
             gifImg.attr("data-animate", gifArray[i].images.fixed_height.url);
@@ -47,6 +52,7 @@ function retrieveGifs(){
 
             gifDiv.append(gifImg);
             gifDiv.append(gifP);
+            gifDiv.append(favBtn);
             
             $("#gifs-col").append(gifDiv);
         }
@@ -83,8 +89,25 @@ searchBtn.on("click", function(e){
 
 });
 
-///button to clear gifs area////
+///button to clear favs area////
 resetBtn.on("click", function(){
-    $("#gifs-col").empty();
+    $("#fav-col").empty();
     makeButtons();
 })
+
+///adds selected gifs to favorites section
+$(document).on("click", ".favBtn", function(){
+    var state = $(this).attr("data-state");
+    var still = $(this).attr("data-still");
+    var animate = $(this).attr("data-animate");
+
+    var favDiv = $("<div class='mb-2'>");
+    var favImg = $("<img class='gifImg img-fluid favImg'>");
+    favImg.attr("src", still);
+    favImg.attr("data-state", state);
+    favImg.attr("data-still", still);
+    favImg.attr("data-animate", animate);
+    favDiv.append(favImg);
+    $("#fav-col").append(favDiv);
+
+});
