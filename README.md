@@ -1,2 +1,2 @@
 # giphy-app
-Repo for Homework 6
+https://catlibwilk.github.io/giphy-app/
